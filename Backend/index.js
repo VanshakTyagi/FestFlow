@@ -3,18 +3,26 @@ const cors = require('cors');
 const dotenv = require('dotenv');
 const mongoose = require('mongoose');
 
-const app = express();
+
+const authRoutes = require('./routes/auth');
+// const eventRoutes = require('./routes/events');
+// const bookingRoutes = require('./routes/bookings');
 
 dotenv.config();
+
+const app = express();
+
 app.use(cors());
+
+// routes
+app.use('/api/auth', authRoutes);
+
 
 mongoose.connect(process.env.MONGODB_URI)
 .then(() => console.log('MongoDB Connected'))
 .catch(error => console.error('MongoDB Connection Error:', error));
 
-// const authRoutes = require('./routes/auth');
-// const eventRoutes = require('./routes/events');
-// const bookingRoutes = require('./routes/bookings');
+
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
