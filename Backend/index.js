@@ -12,7 +12,9 @@ dotenv.config();
 
 const app = express();
 
+//Middleware
 app.use(cors());
+app.use(express.json());
 
 // routes
 app.use('/api/auth', authRoutes);
